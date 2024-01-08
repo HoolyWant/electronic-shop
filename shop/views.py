@@ -1,6 +1,6 @@
-from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.decorators import action
+from rest_framework.filters import SearchFilter
 from rest_framework.response import Response
 
 from shop.models import Product, Contact, Provider
@@ -10,7 +10,6 @@ from shop.serializers import ProductSerializer, ContactSerializer, ProviderSeria
 class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
-    # permission_classes = (, )
 
 
 class ContactViewSet(viewsets.ModelViewSet):
@@ -21,6 +20,9 @@ class ContactViewSet(viewsets.ModelViewSet):
 class ProviderViewSet(viewsets.ModelViewSet):
     serializer_class = ProviderSerializer
     queryset = Provider.objects.all()
+    filter_backends = [SearchFilter,]
+    search_fields = ['contact__country']
+
 
     @action(detail=True, methods=['GET'])
     def clean_debt(self, request, pk=None):
@@ -39,4 +41,5 @@ class ProviderViewSet(viewsets.ModelViewSet):
         new_provider = serializer.save()
         new_provider.level = Provider.objects.get(id=new_provider.linked_id).level + 1
         new_provider.save()
+
 
