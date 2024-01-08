@@ -22,8 +22,7 @@ class Product(models.Model):
 class Contact(models.Model):
     provider = models.ForeignKey(Provider, on_delete=models.CASCADE, **NULLABLE,
                                  related_name='contact', verbose_name='поставщик')
-    title = models.CharField(max_length=100, verbose_name='название')
-    email = models.CharField(max_length=100, verbose_name='почта')
+    email = models.CharField(max_length=100, **NULLABLE, verbose_name='почта')
     country = models.CharField(max_length=100, verbose_name='страна')
     city = models.CharField(max_length=100, verbose_name='город')
     street = models.CharField(max_length=100, verbose_name='улица')
