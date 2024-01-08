@@ -1,7 +1,4 @@
-import os
-
 from rest_framework import serializers
-
 from shop.models import Provider, Product, Contact
 
 
@@ -14,7 +11,7 @@ class ContactSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['title', 'model', 'launch_date', ]
+        fields = ['id', 'title', 'model', 'launch_date', ]
 
 
 class ProviderSerializer(serializers.ModelSerializer):

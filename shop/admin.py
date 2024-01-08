@@ -5,7 +5,7 @@ from shop.models import Provider, Product, Contact
 
 @admin.register(Provider)
 class ProviderAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'contact', 'linked', 'linked_url', 'debt', 'create_date', 'level', ]
+    list_display = ['id', 'title', 'contact', 'linked', 'debt', 'create_date', 'level', ]
     list_filter = ('contact__city', )
 
 
