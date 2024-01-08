@@ -7,7 +7,7 @@ from rest_framework.response import Response
 
 from shop.models import Product, Contact, Provider
 from shop.permissions import IsActive
-from shop.serializers import ProductSerializer, ContactSerializer, ProviderSerializer
+from shop.serializers import ProductSerializer, ContactSerializer, ProviderSerializer, ProviderSerializerWithoutDebt
 
 
 class ProductViewSet(viewsets.ModelViewSet):
@@ -46,3 +46,11 @@ class ProviderViewSet(viewsets.ModelViewSet):
         new_provider = serializer.save()
         new_provider.level = Provider.objects.get(id=new_provider.linked_id).level + 1
         new_provider.save()
+
+    def get_serializer_class(self):
+        serializer_class = self.serializer_class
+
+        if self.request.method == 'PUT' or self.request.method == 'PATCH':
+            serializer_class = ProviderSerializerWithoutDebt
+
+        return serializer_class

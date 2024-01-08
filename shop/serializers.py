@@ -17,8 +17,15 @@ class ProductSerializer(serializers.ModelSerializer):
 class ProviderSerializer(serializers.ModelSerializer):
     product = ProductSerializer(many=True, read_only=True)
     contact_info = ContactSerializer(source='contact', read_only=True)
-    debt = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Provider
         fields = ['id', 'title', 'linked', 'contact', 'contact_info', 'product', 'debt', 'create_date', 'level', ]
+
+
+class ProviderSerializerWithoutDebt(serializers.ModelSerializer):
+    debt = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        model = Provider
+        fields = ['title', 'linked', 'contact', 'debt', 'product', 'create_date', 'level', ]
