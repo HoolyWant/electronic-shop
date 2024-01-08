@@ -11,6 +11,13 @@ django = "^5.0.1"
 pillow = "^10.2.0"
 psycopg2-binary = "^2.9.9"
 djangorestframework = "^3.14.0"
+pep8 = "^1.7.1"
+python-dotenv = "^1.0.0"
+drf-yasg = "^1.21.7"
+coreapi = "^2.3.3"
+rest-framework-simplejwt = "^0.0.2"
+djangorestframework-simplejwt = "^5.3.1"
+django-filter = "^23.5"
 
 
 [build-system]
